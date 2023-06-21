@@ -9,3 +9,5 @@ data/
 *.model.json
 *.model.h5
 *.pb
+
+__pycache__
