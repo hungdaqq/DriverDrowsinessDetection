@@ -1,0 +1,11 @@
+Output/
+Input/
+tmp/
+
+predictionCONV_LSTM.csv
+result_file.csv
+data/
+
+*.model.json
+*.model.h5
+*.pb

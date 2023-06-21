@@ -1,8 +1,8 @@
 from keras.layers import Dense, Flatten, Dropout, ZeroPadding3D
-from keras.layers.recurrent import LSTM
+from keras.layers import LSTM
 from keras.models import Sequential, load_model
 from keras.optimizers import Adam, RMSprop
-from keras.layers.wrappers import TimeDistributed
+from keras.layers import TimeDistributed
 from keras.layers.convolutional import (Conv2D, MaxPooling3D, Conv3D,MaxPooling2D)
 from collections import deque
 import sys
@@ -29,8 +29,7 @@ class ResearchModels():
         self.model = self.lstm()
         # Now compile the network.
         optimizer = Adam(lr=0.00005)
-        self.model.compile(loss='categorical_crossentropy', optimizer=optimizer,
-                           metrics=metrics)
+        self.model.compile(loss='categorical_crossentropy', optimizer=optimizer, metrics=metrics)
 	
         print(self.model.summary())
 

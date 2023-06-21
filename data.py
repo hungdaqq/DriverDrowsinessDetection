@@ -10,23 +10,20 @@ import threading
 from keras.utils import to_categorical
 
 class Dataset():
-
 	def __init__(self, seq_length=26, class_limit=2, image_shape=(56, 24, 3)):
-	        self.seq_length = seq_length
-	        self.class_limit = class_limit
-	        self.sequence_path = os.path.join('data', 'sequences')
-	        # Get the data.
-	        self.data = self.get_data()
+		self.seq_length = seq_length
+		self.class_limit = class_limit
+		self.sequence_path = './data/sequences/'
+		# Get the data.
+		self.data = self.get_data()
 		# Get the classes.
-	        self.classes = self.get_classes()
+		self.classes = self.get_classes()
 
 	def get_data(self):
-		with open(os.path.join('data', 'data_file.csv'), 'r') as fin:
+		with open('./data/data_file.csv', 'r') as fin:
 			reader = csv.reader(fin)
 			data = list(reader)
-			
-			return data
-
+		return data
 
 	def get_classes(self):
 		classes = []
@@ -46,22 +43,15 @@ class Dataset():
 	def get_class_one_hot(self, class_str):
 		# Encode it first.
 		label_encoded = self.classes.index(class_str)
-
 		# Now one-hot it.
 		label_hot = to_categorical(label_encoded, len(self.classes))
-
 		assert len(label_hot) == len(self.classes)
-
 		return label_hot
 
 	def get_all_sequences_in_memory(self, train_test,hyper,seq):
-
-                #train, test = self.split_train_test()
-
-		print("Loading samples into memory for --> ",train_test)
-
+		#train, test = self.split_train_test()
+		print("Loading samples into memory for --> " + train_test)
 		X, y = [], []
-		
 		for videos in self.data:
 			#print(videos)
 			if(videos[0] == train_test):
@@ -75,17 +65,14 @@ class Dataset():
 					X.append(sequence)
 					y.append(self.get_class_one_hot(videos[1]))
 					i+=1
-
 		return np.array(X), np.array(y)
 
 
 	def get_extracted_sequence(self,video,cnt,seq,train_test):
 		"""Get the saved extracted features."""
 		filename = video[2]
-		#print(filename)
-		path = os.path.join(self.sequence_path, train_test,filename + '-' + str(seq) + '-' + 'features' + str(cnt)+'.npy')
-		#print(path)
+		path = self.sequence_path + train_test + '/' + filename + '-' + str(seq) + '-features' + str(cnt) + '.npy'
 		if os.path.isfile(path):
 			return np.load(path)
 		else:
-			return None
+			return print(path)

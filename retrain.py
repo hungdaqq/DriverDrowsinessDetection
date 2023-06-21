@@ -1152,7 +1152,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--output_graph',
       type=str,
-      default='/tmp/output_graph.pb',
+      default='./output_graph.pb',
       help='Where to save the trained graph.'
   )
   parser.add_argument(
@@ -1185,7 +1185,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--how_many_training_steps',
       type=int,
-      default=4000,
+      default=1000,
       help='How many training steps to run before ending.'
   )
   parser.add_argument(
@@ -1209,7 +1209,7 @@ if __name__ == '__main__':
   parser.add_argument(
       '--eval_step_interval',
       type=int,
-      default=10,
+      default=100,
       help='How often to evaluate the training results.'
   )
   parser.add_argument(

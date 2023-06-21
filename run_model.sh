@@ -6,8 +6,8 @@
 # Face Detection
 
 #-------------------------------------------------------------------
-hyper=1000
-seq=50
+hyper=26
+seq=26
 #train_test=0.8
 # i=1
 # if [ -d "Output" ] 
@@ -68,4 +68,4 @@ seq=50
 
 #-------------------------------------------------------------------
 #extract patches for alert subjects
-python train_test.py $seq $hyper
+python3 train_test.py $seq $hyper

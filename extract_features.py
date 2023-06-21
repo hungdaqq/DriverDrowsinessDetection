@@ -24,8 +24,7 @@ def extractor(image_path):
 	    pooling_tensor = sess.graph.get_tensor_by_name('pool_3:0')
 	    #tf.compat.v2.io.gfile.GFile()
 	    image_data = tf.compat.v1.gfile.FastGFile(image_path, 'rb').read()	
-	    pooling_features = sess.run(pooling_tensor, \
-	    	{'DecodeJpeg/contents:0': image_data})
+	    pooling_features = sess.run(pooling_tensor, {'DecodeJpeg/contents:0': image_data})
 	    pooling_features = pooling_features[0]
 
 	return pooling_features
@@ -48,12 +47,12 @@ def extract_features():
 				with tf.Graph().as_default():
 					features = extractor(image)
 					cnt+=1
-					print('Appending sequence of image:',image,' of the video:',videos)
+					print('Appending sequence of image:' + str(image),' of the video:' + str(videos))
 					sequence.append(features)
 
 				if cnt % seq == 0:
 					np.save(path+str(cnt)+'.npy',sequence)
 					sequence = []
-			print('Sequences saved successfully')
-
+					print('Sequences saved successfully')
+			
 extract_features()																																																																				
