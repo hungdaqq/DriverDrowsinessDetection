@@ -875,23 +875,20 @@ def create_model_info(architecture):
   elif architecture.startswith('mobilenet_'):
     parts = architecture.split('_')
     if len(parts) != 3 and len(parts) != 4:
-      tf.logging.error("Couldn't understand architecture name '%s'",
-                       architecture)
+      tf.logging.error("Couldn't understand architecture name '%s'", architecture)
       return None
     version_string = parts[1]
     if (version_string != '1.0' and version_string != '0.75' and
         version_string != '0.50' and version_string != '0.25'):
       tf.logging.error(
-          """"The Mobilenet version should be '1.0', '0.75', '0.50', or '0.25',
-  but found '%s' for architecture '%s'""",
+          """"The Mobilenet version should be '1.0', '0.75', '0.50', or '0.25', but found '%s' for architecture '%s'""",
           version_string, architecture)
       return None
     size_string = parts[2]
     if (size_string != '224' and size_string != '192' and
         size_string != '160' and size_string != '128'):
       tf.logging.error(
-          """The Mobilenet input size should be '224', '192', '160', or '128',
- but found '%s' for architecture '%s'""",
+          """The Mobilenet input size should be '224', '192', '160', or '128', but found '%s' for architecture '%s'""",
           size_string, architecture)
       return None
     if len(parts) == 3:

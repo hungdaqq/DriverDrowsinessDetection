@@ -10,4 +10,7 @@ data/
 *.model.h5
 *.pb
 
+classify/
+val/
+
 __pycache__

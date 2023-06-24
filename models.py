@@ -1,15 +1,11 @@
-from keras.layers import Dense, Flatten, Dropout, ZeroPadding3D
+from keras.layers import Dense, Flatten, Dropout
 from keras.layers import LSTM
 from keras.models import Sequential, load_model
 from keras.optimizers import Adam, RMSprop
-from keras.layers import TimeDistributed
-from keras.layers.convolutional import (Conv2D, MaxPooling3D, Conv3D,MaxPooling2D)
 from collections import deque
-import sys
 
 class ResearchModels():
-    def __init__(self, nb_classes, model, seq_length,
-                 saved_model=None, features_length=2048):
+    def __init__(self, nb_classes, model, seq_length, saved_model=None, features_length=2048):
 
         # Set defaults.
         self.seq_length = seq_length
@@ -36,8 +32,6 @@ class ResearchModels():
     def lstm(self):
         """Build a simple LSTM network. We pass the extracted features from
         our CNN to this model predomenently."""
-        # Model.
-	    #print(self.input_shape)
         model = Sequential()
         model.add(LSTM(2048, return_sequences=True, input_shape=self.input_shape,dropout=0.5))
         model.add(Flatten())
@@ -47,5 +41,3 @@ class ResearchModels():
         model.add(Dense(self.nb_classes, activation='softmax'))
 	
         return model
-
-    

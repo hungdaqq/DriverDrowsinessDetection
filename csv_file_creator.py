@@ -54,7 +54,6 @@ ret = pd.DataFrame(train_test.reshape(-1))
 ret['type']= types.reshape(-1)
 ret['names']=names.reshape(-1)
 
-print("###############\n")
 print("Creating 'data' directory (Will delete if already exists!)...")
 dir = os.path.join(os.getcwd(),"data")
 if os.path.exists(dir):
@@ -65,7 +64,6 @@ print("Created 'data' directory successfully!")
 ret.to_csv(os.path.join(dir,'data_file.csv'),index=False,header=False)
 
 print("\nSaved data_file.csv to data directory")
-print("\n###############")
 
 print("\nCreating 'training' and 'testing' directory inside 'data' directory...\n")
 traindir=os.path.join(dir,"training")
@@ -104,6 +102,7 @@ def move(df,type1):
     for i in range(df.shape[0]):
         cat = df.iloc[i,2].strip().split('_')[0]
         num = df.iloc[i,2].strip().split('_')[1][-1]
+
         strng = df.iloc[i,2]
         shutil.move(reduce(os.path.join,[os.getcwd(),"Output",num,cat]),reduce(os.path.join,[os.getcwd(),"data",type1,cat,strng]))
         source = reduce(os.path.join,[os.getcwd(),"data",type1,cat,strng])
@@ -112,15 +111,5 @@ def move(df,type1):
             if files.endswith(".jpg"):
                 shutil.copy(os.path.join(source,files),destination)
 
-
 move(df_train,"training")
 move(df_test,"testing")
-
-#def move_temp(df,type1):
-#    for i in range(df.shape[0]):
-#s        cat = df.iloc[i,2].strip().split('_')[0]
-#        num = df.iloc[i,2].strip().split('_')[1][-1]
-#        strng = df.iloc[i,2]
-#        shutil.copy(reduce(os.path.join,[os.getcwd(),"data",type1,strng]),reduce(os.path.join,[os.getcwd(),"data",type1]))
-
-

@@ -67,7 +67,6 @@ class Dataset():
 					i+=1
 		return np.array(X), np.array(y)
 
-
 	def get_extracted_sequence(self,video,cnt,seq,train_test):
 		"""Get the saved extracted features."""
 		filename = video[2]

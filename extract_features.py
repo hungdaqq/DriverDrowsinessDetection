@@ -4,18 +4,14 @@ import csv
 import glob
 import tensorflow as tf
 import h5py as h5py
-from keras.preprocessing import image
-from keras.applications.inception_v3 import InceptionV3, preprocess_input
-from keras.models import Model, load_model
 import natsort
 import sys
 
 seq = int(sys.argv[1])
 
-
 def extractor(image_path):
 
-	with open('./output_graph.pb', 'rb') as graph_file:
+	with open('./cnn_model.pb', 'rb') as graph_file:
 		graph_def = tf.compat.v1.GraphDef()
 		graph_def.ParseFromString(graph_file.read())
 		tf.import_graph_def(graph_def, name='')
@@ -25,7 +21,7 @@ def extractor(image_path):
 	    #tf.compat.v2.io.gfile.GFile()
 	    image_data = tf.compat.v1.gfile.FastGFile(image_path, 'rb').read()	
 	    pooling_features = sess.run(pooling_tensor, {'DecodeJpeg/contents:0': image_data})
-	    pooling_features = pooling_features[0]
+		pooling_features = pooling_features[0]
 
 	return pooling_features
 

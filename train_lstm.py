@@ -8,12 +8,11 @@ import numpy as np
 import sys
 import pandas as pd
 
-seq=int(sys.argv[1])
+seq = int(sys.argv[1])
 hyper = int(sys.argv[2])
 
 df = pd.read_csv('./data/data_file.csv', header = None)
 df_res = pd.DataFrame()
-
 
 # Number of training/testing sequences
 train_no = df[df.iloc[:,0] == 'training'].shape[0]
@@ -36,8 +35,6 @@ timestamp = time.time()
 
 csv_logger = CSVLogger(os.path.join('data', 'logs', 'lstm' + '-' + 'training-' + str(timestamp) + '.log'))
 
-rm = ResearchModels(len(data.classes),'lstm',data.seq_length, None)
-
 print("-------------------------------------------------------------")
 X_train = np.ravel(X_train)
 X_train = X_train.reshape((train_no, seq,-1))
@@ -50,11 +47,10 @@ print("X_test.shape" ,X_test.shape)
 print("y_test.shape" ,y_test.shape)
 print('-------------------------------------------------------------')
 
-
-
 batch_size = 2
-nb_epoch = 10
+nb_epoch = 20
 
+rm = ResearchModels(len(data.classes),'lstm',data.seq_length, None)
 rm.model.fit(
     X_train,
     y_train,
@@ -65,3 +61,7 @@ rm.model.fit(
     epochs=nb_epoch)
 
 model_json = rm.model.to_json()
+with open("rm.model.json",'w') as json_file:
+	json_file.write(model_json)
+rm.model.save_weights("rm.model.h5")
+print("Model saved")

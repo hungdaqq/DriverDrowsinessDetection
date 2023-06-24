@@ -33,6 +33,7 @@ def eye_tracker(v):
             continue
         elif(croppedImg.shape[0] <= croppedImg.shape[1]/2.2):
             output_name = "./" + sys.argv[2] + str(frameCounter) + ".jpg"
+            print(output_name)
             cv2.imwrite(output_name, croppedImg)
         cv2.rectangle(frame,(ex-5,ey-5),(ex+(ex1-ex)+ew1+5,ey+eh+5),(0,255,0),2)
         cv2.imshow('capture',frame)
