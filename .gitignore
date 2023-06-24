@@ -13,4 +13,7 @@ data/
 classify/
 val/
 
+.vscode/
+classify_data/
+
 __pycache__
