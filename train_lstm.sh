@@ -1,3 +1,3 @@
-hyper=26
-seq=26
-python3 train_test.py $seq $hyper
+hyper=60
+seq=30
+python3 train_lstm.py $seq $hyper

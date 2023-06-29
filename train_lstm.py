@@ -10,13 +10,13 @@ import pandas as pd
 
 seq = int(sys.argv[1])
 hyper = int(sys.argv[2])
-
+rate = int(hyper/seq)
 df = pd.read_csv('./data/data_file.csv', header = None)
 df_res = pd.DataFrame()
 
 # Number of training/testing sequences
-train_no = df[df.iloc[:,0] == 'training'].shape[0]
-test_no = df[df.iloc[:,0] == 'testing'].shape[0]
+train_no = df[df.iloc[:,0] == 'training'].shape[0] * rate
+test_no = df[df.iloc[:,0] == 'testing'].shape[0] * rate
 # Load data
 data = Dataset(
 	seq_length=seq,
@@ -29,7 +29,7 @@ checkpointer = ModelCheckpoint(filepath=os.path.join('data', 'checkpoints', 'lst
 
 tb = TensorBoard(log_dir=os.path.join('data', 'logs', 'lstm'))
 
-early_stopper = EarlyStopping(patience=5)
+early_stopper = EarlyStopping(patience=10)
 
 timestamp = time.time()
 
@@ -47,8 +47,8 @@ print("X_test.shape" ,X_test.shape)
 print("y_test.shape" ,y_test.shape)
 print('-------------------------------------------------------------')
 
-batch_size = 2
-nb_epoch = 20
+batch_size = 4
+nb_epoch = 50
 
 rm = ResearchModels(len(data.classes),'lstm',data.seq_length, None)
 rm.model.fit(

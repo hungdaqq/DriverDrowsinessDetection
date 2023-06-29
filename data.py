@@ -10,7 +10,7 @@ import threading
 from keras.utils import to_categorical
 
 class Dataset():
-	def __init__(self, seq_length=26, class_limit=2, image_shape=(56, 24, 3)):
+	def __init__(self, seq_length=30, class_limit=2, image_shape=(80, 128, 3)):
 		self.seq_length = seq_length
 		self.class_limit = class_limit
 		self.sequence_path = './data/sequences/'
