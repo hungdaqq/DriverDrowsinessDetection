@@ -1,19 +1,21 @@
-Output/
-Input/
-tmp/
+# Output/
+# Input/
+# tmp/
 
-predictionCONV_LSTM.csv
-result_file.csv
-data/
+# predictionCONV_LSTM.csv
+# result_file.csv
+# data/
 
-*.model.json
-*.model.h5
-*.pb
+# *.model.json
+# *.model.h5
+# *.pb
 
-classify/
-val/
+# classify/
+# val/
 
 .vscode/
-classify_data/
+# classify_data/
 
-__pycache__
+__pycache__/
+rm.model.h5
+rm.model.json
